@@ -157,7 +157,9 @@ class Program
         p.GetRequiredString("...")
         ```
 
-#### Questions to figure out structure
+## Structure
+
+### Questions to figure out structure
 - Where should this method be accessible from?
     - It should be accessible from any part of the code base and from any external assemblies
         - Public
@@ -194,3 +196,67 @@ class Program
 - Does this method need any data passed in to perform its actions?
     - Yes, specify the type and name
     - No, empty parenthesis
+
+### Anatomy of the method declaration
+
+> [access modifier][static][return type]\[Name]([parameters]){}
+
+#### Access Modifiers
+- determines what can access the method
+- optional
+    - if omitted defaults to the most restrictice option
+- types:
+    - Public
+        - accessed by any other code in this assembly or others
+    - Private
+        - Only accessed by other code within the same type
+    - Protected
+        - only within the same type or types that inherit from it
+    - Internal
+        - only accessed within this assembly
+    - Protected Internal
+        - combines protected's same type/ children of type rule with Internal's only in this assembly rule
+
+#### Static
+- optional
+- makes the member accessible without a new object instance
+- Useful in these cases:
+    - When theres only ever one instance of the type, like Console
+    - The method is general purpose and does not save data between calls
+
+#### Return Type
+- If a method returns a value, it has to be declared and the method is required to ALWAYS return that value type
+    - if it isnt returned you'll see a not all code paths return a value compiler error
+
+```
+public void SayHello()
+{
+    Console.WriteLine("Hello, world!");
+}
+```
+- when theres no return value use void
+    - there will be no return statement generally
+    - empty return statements can be used to leave a method early
+```
+public void Divide(Book book, Borrower person)
+{
+    if (book.IsReserved() || person.HasOutstandingFees())
+    {
+        return;
+    }
+    book.Checkout()
+}
+```
+- When a method does return a value
+    - it must be specified in the signature
+    - something of a compatible type HAS to be returned
+    - null is compatible with all types
+    - Exceptions are also allowable for all types
+```
+public Employee Get EmployeeInformation(int employeeID)
+{
+    if(!Employee.has(employeeId)) return null
+}
+```
+
+#### Method Names and Overloading
