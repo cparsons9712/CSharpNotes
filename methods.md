@@ -260,3 +260,115 @@ public Employee Get EmployeeInformation(int employeeID)
 ```
 
 #### Method Names and Overloading
+- Names
+    - Proper cased
+    - Cannot start with a number
+    - Cannot contain symbols
+    - Do not have to be unique with a type
+    - combination of name and parameters must be unique
+- Overloading
+    - Same name, different parameters
+    ```
+    public class Calculator
+    {
+        public int Add(int x, int y)
+        {
+            return x + y
+        }
+
+        public int Add(int x, int y, int z)
+        {
+            return x + y + z
+        }
+
+        public decimal Add(decimal x, decimal y)
+        {
+            return x + y
+        }
+    }
+    ```
+####  Parameters
+- must be declared with a type that will be strictly enforced
+- we make parameters optional with the following strategies:
+    - Overloading
+    ```
+    public class Calculator
+    {
+        public int Add(int x, int y)
+        {
+            return x + y
+        }
+        public int Add(int x, int y, int z)
+        {
+            return x + y + z
+        }
+    }
+    ```
+    - Default Value
+        - allow the invoker to skip providing a value
+        - comes at the end of the parameter list
+        ```
+        public class Calculator
+        {
+            public int Add(int x, int y, int z = 0)
+            {
+                return x + y + z
+            }
+        }
+        ```
+    - out keyword
+        - allows us to send out a value in a parameter in addition to the return value
+
+        ```
+        public bool SafeDivide(int x, int y, out int result)
+        {
+            if (y != 0)
+            {
+                result = x / y;
+                return true
+            }
+            else
+            {
+                result = 0;
+                return false;
+            }
+        }
+        ```
+        - the output variable is usable by the invoker
+        ```
+        int quotient;
+
+        if(SafeDivide(5, 0, out quotient))
+        {
+            Console.WriteLine($"The result is {quotient}")
+        }
+        else
+        {
+            Console.WriteLine("Could not divide those two numbers")
+        }
+        ```
+- params
+    - populates an array of values
+    - allows a method to take an indeterminate number of parameters
+    ```
+    public static int Add(params int[] values)
+    {
+        int sum = 0;
+
+        foreach(int val in values)
+        {
+            sum += val;
+        }
+        return sum;
+    }
+    ```
+### Method Chaining
+```
+string s = "   hello   ";
+s = s.Trim().ToUpper();
+```
+
+### Methods as Parameters
+```
+int result = Add(GetPositiveInteger(), GetPositiveInteger())
+```
