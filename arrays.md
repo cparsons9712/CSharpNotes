@@ -44,7 +44,7 @@ planets[8] = null // overright this value since Pluto "isnt a planet anymore" - 
 string val = planets[50] // this is outside the bounds of our array so we will get an error
 ```
 
-## Iterating Over Arrays
+## Array Navigation
 
 ### Getting length
 
@@ -83,3 +83,128 @@ int[] lastThreeElements = array[^3..]; // 3, 4, 5
 int[] slice = array[2..^3]; // 3
 ```
 
+## Loops
+
+### While Loop
+```
+string[] elements = {"Hydrogen", "Helium", "Lithium", "Beryllium"};
+
+int index = 0;
+while(index < elements.Length)
+{
+    Console.WriteLine($"The element at index {index} is {elements[index]}");
+    index++;
+}
+
+index = elements.Length -1;
+while(index >= 0)
+{
+    Console.WriteLine($"the elements at index {index} is {elements[index]}")
+    index--;
+}
+```
+
+### For Loop
+```
+string[] elements = {"Hydrogen", "Helium", "Lithium", "Beryllium"};
+
+for(int i=0; i<elements.Length; i++)
+{
+    Console.WriteLine($"the element at index {index} is {elements[index]}")
+}
+
+for(int i=elements.Length-1; i>=0; i++)
+{
+    Console.WriteLine($"The element at index {index} is {elements[index]}")
+}
+```
+# Multi-dimensional Array/ Matrix
+
+## Creation
+```
+string[,] twoDimensional Array
+
+int[,] values = new int[10,12];
+
+string[,] threeOfAKind = {
+    {"Strawberry", "Blueberry", "Blackberry"},
+    {"Red", "Yellow", "Blue"},
+    {"Atlantic", "Pacific", "Indian"},
+};
+
+int[,,] valueCube = {
+    {
+        { 1, 2, 3 },
+        { 4, 5, 6 },
+        { 7, 8, 9 }
+    },
+    {
+        { 11, 12, 13 },
+        { 14, 15, 16 },
+        { 17, 18, 19 }
+    },
+    {
+        { 21, 22, 23 },
+        { 24, 25, 26 },
+        { 27, 28, 29 }
+    }
+}
+```
+## Reading and Writing
+```
+string[,] threeOfAKind = new string[3,3]{
+    { "Strawberry", "Blueberry", "Blackberry" },
+    { "Red", "Yellow", "Blue" },
+    { "Atlantic", "Pacific", "Indian" }
+};
+
+string element = threeOfAKind[1,2]; //Blue
+string ocean = threeOfAKind[2,0]; // Atlantic
+
+threeOfAKind[2,0] = "Artic"
+```
+
+## Looping
+```
+string[,] grid =
+{
+    { "(0,0)", "(0,1)", "(0,2)" },
+    { "(1,0)", "(1,1)", "(1,2)" },
+    { "(2,0)", "(2,1)", "(2,2)" }
+}
+
+int rows = grid.GetLength(0);
+int cols = grid.GetLength(1);
+
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < cols; j++)
+    {
+        Console.WriteLine(grid[i, j]);
+    }
+}
+```
+
+# Jagged Arrays
+
+## initialize
+```
+int[][] familyAges = new int[3][];
+
+familyAges[0] = new int[] {44, 44, 13, 16, 20};
+familyAges[1] = new int[] {32, 23, 3, 5};
+familyAges[2] = new int[] {55, 53};
+
+int val = familyAges[1][2];  // 3
+```
+## Loop
+```
+for(int 1 = 0; i < familyAges.Length; i++)
+{
+    Console.WriteLine($"Family {i}");
+    for (int j = 0; j < familyAges[i].Length; j++)
+    {
+        ConsoleWriteLine($"Member {j} is {familyAges[i][j]} years old");
+    }
+}
+```
